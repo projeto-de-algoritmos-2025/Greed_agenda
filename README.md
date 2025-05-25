@@ -19,6 +19,6 @@ Aplicativo de agenda com interface gráfica em Python (Tkinter), que permite cad
 
 O botão **"Otimizar Agenda"** aplica o algoritmo **Interval Scheduling**, que seleciona o maior subconjunto de tarefas compatíveis entre si (sem sobreposição), maximizando o aproveitamento do tempo.
 
-## Estrutura do Projeto
+
 
 
