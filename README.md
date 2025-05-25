@@ -21,4 +21,44 @@ O botão **"Otimizar Agenda"** aplica o algoritmo **Interval Scheduling**, que s
 
 
 
+## ▶️ Como executar
+
+Siga os passos abaixo para rodar a Agenda Inteligente na sua máquina:
+
+### 1. Clone ou baixe o projeto
+
+Se estiver usando Git:
+
+```bash
+git clone https://github.com/projeto-de-algoritmos-2025/Greed_agenda.git
+cd Greed_agenda
+cd agenda
+```
+
+
+### 2. Verifique se você tem o Python 3 instalado
+
+Execute:
+
+```bash
+python3 --version
+```
+
+Se não tiver, instale o Python 3 pela [página oficial](https://www.python.org/downloads/).
+
+### 3. Rode o programa
+
+No terminal, dentro da pasta do projeto (agenda):
+
+```bash
+python3 main.py
+```
+
+A interface gráfica será exibida.
+
+
+
+
+
+
 
