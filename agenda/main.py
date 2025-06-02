@@ -47,7 +47,6 @@ class AgendaApp:
         ttk.Button(input_frame, text="Salvar Edição", command=self.save_edited_task).grid(row=8, column=0, columnspan=2, pady=5)
         ttk.Button(input_frame, text="Limpar Agenda", command=self.clear_all_tasks).grid(row=9, column=0, columnspan=2, pady=5)
 
-
         self.tasks_frame = ttk.LabelFrame(self.root, text="Todas as Tarefas", padding=10)
         self.tasks_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
         self.tree = ttk.Treeview(self.tasks_frame, columns=("title", "start", "end", "priority"), show="headings")
@@ -84,7 +83,7 @@ class AgendaApp:
         if not selected:
             messagebox.showwarning("Aviso", "Selecione uma tarefa para excluir.")
             return
-        idx = self.tree.index(selected[0])
+        idx = int(selected[0])  
         del self.tasks[idx]
         save_tasks(self.tasks)
         self.update_tasks_list()
@@ -95,7 +94,7 @@ class AgendaApp:
             messagebox.showwarning("Aviso", "Selecione uma tarefa para editar.")
             return
 
-        idx = self.tree.index(selected[0])
+        idx = int(selected[0])  
         task = self.tasks[idx]
 
         self.editing_index = idx
@@ -129,7 +128,7 @@ class AgendaApp:
             messagebox.showinfo("Sucesso", "Tarefa editada com sucesso!")
         except Exception as e:
             messagebox.showerror("Erro", str(e))
-    
+
     def clear_all_tasks(self):
         confirm = messagebox.askyesno("Confirmação", "Tem certeza que deseja excluir todas as tarefas?")
         if confirm:
@@ -140,12 +139,11 @@ class AgendaApp:
             self.update_scheduled_list()
             messagebox.showinfo("Agenda Limpa com sucesso", "Todas as tarefas foram removidas.")
 
-
     def update_tasks_list(self):
         for item in self.tree.get_children():
             self.tree.delete(item)
-        for task in sorted(self.tasks, key=lambda t: t.start_time):
-            self.tree.insert("", "end", values=(
+        for idx, task in enumerate(self.tasks):
+            self.tree.insert("", "end", iid=str(idx), values=(
                 task.title,
                 task.start_time.strftime("%Y-%m-%d %H:%M"),
                 task.end_time.strftime("%Y-%m-%d %H:%M"),

@@ -23,9 +23,14 @@ Aplicativo de agenda com interface gráfica em Python (Tkinter), que permite cad
 - Visualizar todas as tarefas cadastradas
 - Otimizar automaticamente as tarefas (selecionar o maior número de tarefas não sobrepostas)
 - Excluir tarefas
+- Editar tarefas
+- Limpar agenda
 - Persistência local de dados (`tasks.json`)
 
 ## Screenshots
+![Tela Inicial](img/telaInicial.png)
+![Tarefas otimizadas](img/agendaOtimizada.png)
+![Limpeza de agenda](img/agendaLimpa.png)
 
 ## Algoritmo de Otimização
 
