@@ -1,6 +1,16 @@
 # Greed_agenda
 
-# Agenda Inteligente
+**Número da Lista**: 3 <br>
+**Conteúdo da Disciplina**: Greed <br>
+
+## Alunos
+|Matrícula | Aluno |
+| -- | -- |
+| 211042327  |  Carlos Gabriel Cardoso Ramos |
+| 202016604  |  João Lucas Miranda de Sousa |
+
+## Sobre
+### Agenda Inteligente
 
 Aplicativo de agenda com interface gráfica em Python (Tkinter), que permite cadastrar, visualizar e **otimizar tarefas automaticamente** com base no algoritmo de _Interval Scheduling_.
 
@@ -14,6 +24,8 @@ Aplicativo de agenda com interface gráfica em Python (Tkinter), que permite cad
 - Otimizar automaticamente as tarefas (selecionar o maior número de tarefas não sobrepostas)
 - Excluir tarefas
 - Persistência local de dados (`tasks.json`)
+
+## Screenshots
 
 ## Algoritmo de Otimização
 
@@ -56,7 +68,7 @@ python3 main.py
 
 A interface gráfica será exibida.
 
-
+## Outros
 
 
 
