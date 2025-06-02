@@ -45,6 +45,8 @@ class AgendaApp:
         ttk.Button(input_frame, text="Excluir Selecionada", command=self.delete_task).grid(row=6, column=0, columnspan=2, pady=5)
         ttk.Button(input_frame, text="Editar Selecionada", command=self.edit_task).grid(row=7, column=0, columnspan=2, pady=5)
         ttk.Button(input_frame, text="Salvar Edição", command=self.save_edited_task).grid(row=8, column=0, columnspan=2, pady=5)
+        ttk.Button(input_frame, text="Limpar Agenda", command=self.clear_all_tasks).grid(row=9, column=0, columnspan=2, pady=5)
+
 
         self.tasks_frame = ttk.LabelFrame(self.root, text="Todas as Tarefas", padding=10)
         self.tasks_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
@@ -127,6 +129,17 @@ class AgendaApp:
             messagebox.showinfo("Sucesso", "Tarefa editada com sucesso!")
         except Exception as e:
             messagebox.showerror("Erro", str(e))
+    
+    def clear_all_tasks(self):
+        confirm = messagebox.askyesno("Confirmação", "Tem certeza que deseja excluir todas as tarefas?")
+        if confirm:
+            self.tasks = []
+            self.scheduled_tasks = []
+            save_tasks(self.tasks)
+            self.update_tasks_list()
+            self.update_scheduled_list()
+            messagebox.showinfo("Agenda Limpa com sucesso", "Todas as tarefas foram removidas.")
+
 
     def update_tasks_list(self):
         for item in self.tree.get_children():
@@ -159,4 +172,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = AgendaApp(root)
     root.mainloop()
-    
