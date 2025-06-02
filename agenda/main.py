@@ -11,6 +11,7 @@ class AgendaApp:
         self.root.title("Agenda Inteligente")
         self.tasks = load_tasks()
         self.scheduled_tasks = []
+        self.editing_index = None 
 
         self.setup_ui()
         self.update_tasks_list()
@@ -42,6 +43,8 @@ class AgendaApp:
         ttk.Button(input_frame, text="Adicionar", command=self.add_task).grid(row=4, column=0, columnspan=2, pady=5)
         ttk.Button(input_frame, text="Otimizar Agenda", command=self.schedule_tasks).grid(row=5, column=0, columnspan=2, pady=5)
         ttk.Button(input_frame, text="Excluir Selecionada", command=self.delete_task).grid(row=6, column=0, columnspan=2, pady=5)
+        ttk.Button(input_frame, text="Editar Selecionada", command=self.edit_task).grid(row=7, column=0, columnspan=2, pady=5)
+        ttk.Button(input_frame, text="Salvar Edição", command=self.save_edited_task).grid(row=8, column=0, columnspan=2, pady=5)
 
         self.tasks_frame = ttk.LabelFrame(self.root, text="Todas as Tarefas", padding=10)
         self.tasks_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
@@ -84,6 +87,47 @@ class AgendaApp:
         save_tasks(self.tasks)
         self.update_tasks_list()
 
+    def edit_task(self):
+        selected = self.tree.selection()
+        if not selected:
+            messagebox.showwarning("Aviso", "Selecione uma tarefa para editar.")
+            return
+
+        idx = self.tree.index(selected[0])
+        task = self.tasks[idx]
+
+        self.editing_index = idx
+        self.title_entry.delete(0, tk.END)
+        self.title_entry.insert(0, task.title)
+
+        self.start_entry.delete(0, tk.END)
+        self.start_entry.insert(0, task.start_time.strftime("%Y-%m-%d %H:%M"))
+
+        self.end_entry.delete(0, tk.END)
+        self.end_entry.insert(0, task.end_time.strftime("%Y-%m-%d %H:%M"))
+
+        self.priority_combobox.set(task.priority)
+
+    def save_edited_task(self):
+        if self.editing_index is None:
+            messagebox.showwarning("Aviso", "Nenhuma tarefa em edição.")
+            return
+
+        try:
+            title = self.title_entry.get()
+            start = self.start_entry.get()
+            end = self.end_entry.get()
+            priority = int(self.priority_combobox.get())
+
+            edited_task = Task(title, start, end, priority)
+            self.tasks[self.editing_index] = edited_task
+            save_tasks(self.tasks)
+            self.update_tasks_list()
+            self.editing_index = None
+            messagebox.showinfo("Sucesso", "Tarefa editada com sucesso!")
+        except Exception as e:
+            messagebox.showerror("Erro", str(e))
+
     def update_tasks_list(self):
         for item in self.tree.get_children():
             self.tree.delete(item)
@@ -115,4 +159,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = AgendaApp(root)
     root.mainloop()
-
+    
