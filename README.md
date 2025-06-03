@@ -74,8 +74,6 @@ python3 main.py
 A interface gráfica será exibida.
 
 ## Outros
-
-
-
+[![Vídeo explicativo](https://img.youtube.com/vi/gYrDXuOqaPE/maxresdefault.jpg)](https://www.youtube.com/watch?v=gYrDXuOqaPE)
 
 
